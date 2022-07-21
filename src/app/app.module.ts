@@ -7,6 +7,7 @@ import { HelloComponent } from './hello.component';
 import { HeaderComponent } from './header/header.component';
 import { ToDoElementComponent } from './toDo/toDoElement/toDoElement.component';
 import { ToDoListComponent } from './toDo/toDoList/toDoList.component';
+import { EditComponent } from './edit/edit.component'
 
 @NgModule({
   imports:
@@ -20,7 +21,8 @@ import { ToDoListComponent } from './toDo/toDoList/toDoList.component';
     HelloComponent,
     HeaderComponent,
     ToDoElementComponent,
-    ToDoListComponent
+    ToDoListComponent,
+    EditComponent
   ],
   bootstrap:
   [ 

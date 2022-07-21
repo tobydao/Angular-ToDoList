@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { todo } from '../todo.model'
 
 @Component({
   selector: 'app-toDoList',
@@ -8,9 +7,8 @@ import { todo } from '../todo.model'
 })
 
 export class ToDoListComponent  {
-
-  toDoElements: todo[] = [
-    new todo("vacuum")
+  toDos: string[] = [
+    "vaccum",
+    "clean"
   ]
-  
 }
