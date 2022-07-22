@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToDoService } from '../toDo.service';
 
 @Component({
   selector: 'app-edit',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
 })
 
 export class EditComponent  {
+
+  constructor(private toDoService: ToDoService) {}
+
+  addTask(task: string) {
+    this.toDoService.addTask(task)
+  }
   
 }
