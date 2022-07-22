@@ -10,6 +10,6 @@ export class ToDoService {
   }
 
   removeTask(taskId: number) {
-    this.tasks.splice(taskId);
+    this.tasks.splice(taskId, 1);
   }
 }

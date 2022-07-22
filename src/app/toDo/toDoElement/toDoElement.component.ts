@@ -12,4 +12,8 @@ export class ToDoElementComponent  {
   @Input() element: string;
 
   constructor(private toDoService: ToDoService){}
+
+  onDeleteItem() {
+    this.toDoService.removeTask(this.id)
+  }
 }
