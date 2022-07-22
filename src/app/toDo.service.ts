@@ -2,7 +2,8 @@ export class ToDoService {
 
   tasks: string[] = [
     "vaccum",
-    "clean"
+    "order book",
+    "exercise"
   ]
 
   addTask(task: string) {
