@@ -1,8 +1,8 @@
 <div class = "row">
   <div class="col-xs-12">
-    <p *ngIf="tasks.length<1">Alle Tasks erledigt!</p>
+    <p *ngIf="tasks.length<1">all tasks are done!</p>
     <ul *ngIf="tasks.length>=1" class="list-group">
-      <app-toDoElement *ngFor="let task of tasks; let i = index" [id] = i [element]="task"></app-toDoElement>
+      <app-toDoElement *ngFor="let task of tasks; let i = index" [id] = i [element]="task.name"></app-toDoElement>
     </ul>
   </div>
 </div>

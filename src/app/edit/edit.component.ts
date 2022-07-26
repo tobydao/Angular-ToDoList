@@ -13,8 +13,9 @@ export class EditComponent  {
   constructor(private toDoService: ToDoService) {}
 
   onAddTask() {
-    var task = this.taskInputRef.nativeElement.value;
-    this.toDoService.addTask(task)
+    var task = {name: this.taskInputRef.nativeElement.value};
+    this.toDoService.sendTask(task)
+    this.toDoService.addEvent.emit(true);
   }
   
 }
