@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToDoService } from '../../toDo.service';
 
 @Component({
@@ -6,25 +6,38 @@ import { ToDoService } from '../../toDo.service';
   templateUrl: './toDoList.component.html'
 })
 
-export class ToDoListComponent implements OnInit {
-  tasks: {name: string}[] = [];
+export class ToDoListComponent implements OnInit, OnDestroy {
+  tasks: {name: string, id: string}[] = [];
+  isLoading = false;
+  error = null;
 
   constructor(private toDoService: ToDoService) {}
 
   ngOnInit() {
     //this.tasks = this.toDoService.tasks;
-    this.toDoService.addEvent.subscribe((added) => {
-        this.onTaskAdd();
+    this.isLoading = true;
+
+    this.toDoService.taskDeleted.subscribe( () => this.onTaskDeleted());
+    this.toDoService.taskAdded.subscribe( () => this.onTaskAdded());
+
+    this.toDoService.fetchTasks().subscribe(posts => {
+      this.tasks = posts;
+      this.isLoading = false;
+    }, error => { this.error = error.message
     })
-    this.toDoService.fetchTasks().subscribe(posts =>
-      this.tasks = posts
-    )
   }
 
-  onTaskAdd(){
-    this.toDoService.fetchTasks().subscribe(posts => {
-      console.log("Event");
-      this.tasks = posts;
-    })
+  ngOnDestroy() {
+    this.toDoService.taskDeleted.unsubscribe();
+    this.toDoService.taskAdded.unsubscribe();
+  }
+
+  onTaskAdded(){
+    console.log("Task added");
+    this.ngOnInit();
+  }
+  onTaskDeleted(){  
+    console.log("Task deleted");
+    this.ngOnInit();
   }
 }

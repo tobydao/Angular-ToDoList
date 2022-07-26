@@ -15,7 +15,7 @@ export class EditComponent  {
   onAddTask() {
     var task = {name: this.taskInputRef.nativeElement.value};
     this.toDoService.sendTask(task)
-    this.toDoService.addEvent.emit(true);
+    this.toDoService.taskAdded.emit();
   }
   
 }

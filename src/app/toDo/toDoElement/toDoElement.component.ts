@@ -8,12 +8,14 @@ import { ToDoService } from '../../toDo.service';
 })
 
 export class ToDoElementComponent  {
-  @Input() id: number;
+  @Input() id: string;
   @Input() element: string;
 
   constructor(private toDoService: ToDoService){}
 
   onDeleteItem() {
-    this.toDoService.removeTask(this.id)
+    //this.toDoService.removeTask(this.id)
+    this.toDoService.deleteTask(this.id);
+    this.toDoService.taskDeleted.emit();
   }
 }

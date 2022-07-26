@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, EventEmitter, Output } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -7,7 +7,8 @@ export class ToDoService {
 
   url: string = 'https://todoapp-c409d-default-rtdb.europe-west1.firebasedatabase.app/tasks.json';
   isFetching: boolean;
-  @Output() addEvent = new EventEmitter<boolean>();
+  taskDeleted: EventEmitter<void> = new EventEmitter<void>();
+  taskAdded: EventEmitter<void> = new EventEmitter<void>();
   
   constructor(private http: HttpClient){}
 
@@ -26,7 +27,11 @@ export class ToDoService {
   addTask(task: {name: string}) {
     this.tasks.push(task);
   }
-   */ 
+   */
+
+  deleteTask(id: string) {
+    this.http.delete('https://todoapp-c409d-default-rtdb.europe-west1.firebasedatabase.app/tasks/' + id + '.json').subscribe();
+  }
 
   sendTask(task: {name: string}){
     this.http.post(
@@ -45,7 +50,7 @@ export class ToDoService {
         const taskArray = [];
         for (const key in responseData) {
           if(responseData.hasOwnProperty(key)) {
-            taskArray.push(responseData[key])
+            taskArray.push({ ...responseData[key], id: key})
           }
         }
         return taskArray;
